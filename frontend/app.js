@@ -87,11 +87,11 @@ async function send(txt) {
         const body = { message: txt, history: hist };
 
         // CANLI URL BURADA
-        const res = await fetch('https://baun-myo-ai.onrender.com/chat', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(body)
-        });
+        const res = await fetch('/chat', { // Render'da ana dizindeyiz, direkt /chat yeterli
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ message: txt }) 
+});
         
         if (!res.ok) throw new Error(`HTTP ${res.status}`);
         const data = await res.json();
