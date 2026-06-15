@@ -147,63 +147,48 @@ input { font-family: inherit; }
   .w-title { font-size: 20px; }
   .chips { display: flex; flex-direction: column; max-width: 100%; }
   .chip { width: 100%; }
-}
-/* --- MOBİL İÇİN GARANTİLİ DÜZENLEMELER --- */
+}/* --- MOBİL İÇİN TAM EKRAN SAAS ARAYÜZÜ --- */
 @media (max-width: 768px) {
-    /* Sidebar Menü - Kapalıyken solda gizli */
+    /* 1. Sidebar'ı tam ekran yap ve üstüne bindir */
     #sidebar {
-        position: fixed;
-        left: -280px; 
-        top: 0;
-        width: 250px;
-        height: 100%;
+        position: fixed !important;
+        left: -280px !important;
+        top: 0 !important;
+        width: 250px !important;
+        height: 100vh !important;
+        z-index: 9999 !important;
+        transition: 0.3s ease !important;
+        box-shadow: 5px 0 20px rgba(0,0,0,0.15) !important;
+    }
+    #sidebar.active { left: 0 !important; }
+
+    /* 2. Üst Barı (TopBar) hizala */
+    .topbar {
+        display: flex !important;
+        flex-direction: row !important;
+        align-items: center !important;
+        padding: 10px 15px !important;
+        gap: 10px !important;
         background: #fff;
-        z-index: 9999;
-        transition: 0.3s;
-        box-shadow: 2px 0 10px rgba(0,0,0,0.2);
-        overflow-y: auto;
     }
     
-    #sidebar.active {
-        left: 0; /* Açılınca ekrana gelir */
-    }
-
-    /* Buton Grubu - Mobilde alt alta ve düzgün */
-    .button-group {
-        display: flex;
-        flex-direction: column;
-        gap: 10px;
-        width: 90%;
-        margin: 15px auto;
-    }
-
-    button {
-        font-size: 13px !important;
-        padding: 12px !important;
-        width: 100% !important;
-        border-radius: 8px;
-    }
-
-    /* Mesaj Kutusu */
-    #chat-input {
-        width: 80% !important;
-        font-size: 16px; /* iPhone'da zoom yapmasını engeller */
-    }
-}
-/* --- MOBİL İÇİN EKSTRA GÜVENLİ FİX --- */
-@media (max-width: 768px) {
-    /* 3 Çizgi Butonunu Mobil İçin Zorla Görünür ve Tıklanabilir Yap */
+    /* 3 Çizgi (Hamburger) Butonu */
     .toggle-btn-menu {
         display: block !important;
-        position: relative !important;
-        z-index: 10000 !important;
-        pointer-events: auto !important;
-        cursor: pointer !important;
+        font-size: 24px !important;
+        margin-right: 5px !important;
+        order: -1; /* En sola al */
     }
 
-    /* Sidebar'ı mobilde tam üzerine oturt */
-    #sidebar.active {
-        left: 0 !important;
-        display: flex !important;
+    /* 3. Karşılama Ekranı (Welcome) */
+    .welcome { 
+        padding: 10px !important; 
+        margin-top: 20px !important;
     }
+    .w-title { font-size: 20px !important; }
+
+    /* 4. Alt Giriş Kutusu (Input) */
+    .bottom-area { padding: 10px !important; }
+    .inp-card { padding: 5px 15px !important; }
+    #chat-input { width: 100% !important; font-size: 16px !important; }
 }

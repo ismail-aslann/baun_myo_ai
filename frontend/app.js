@@ -17,11 +17,13 @@ function scrollEnd() {
     if(w) w.scrollTop = w.scrollHeight; 
 }
 function showWelcome(v) { 
-    document.getElementById('welcome-screen').style.display = v ? 'flex' : 'none'; 
+    const el = document.getElementById('welcome-screen');
+    if(el) el.style.display = v ? 'flex' : 'none'; 
 }
 
 function renderHistory() {
     const el = document.getElementById('chat-history-list');
+    if (!el) return;
     if (!sessions.length) { 
         el.innerHTML = '<div class="h-empty"><i class="fa-regular fa-comment-dots"></i><span>Henüz sohbet yok</span></div>'; 
         return; 
@@ -41,6 +43,7 @@ function buildBubble(m) {
 
 function addBubble(m) {
     const w = document.getElementById('chat-messages');
+    if(!w) return;
     const d = document.createElement('div');
     d.innerHTML = buildBubble(m);
     w.appendChild(d.firstElementChild);
@@ -49,6 +52,7 @@ function addBubble(m) {
 
 function renderMsgs(arr) {
     const w = document.getElementById('chat-messages');
+    if(!w) return;
     w.innerHTML = '';
     arr.forEach(m => addBubble(m));
     scrollEnd();
@@ -56,6 +60,7 @@ function renderMsgs(arr) {
 
 function showTyping() {
     const w = document.getElementById('chat-messages');
+    if(!w) return;
     const d = document.createElement('div');
     d.className = 'msg assistant'; d.id = 'typing';
     d.innerHTML = `<div class="av">${A_AV}</div><div class="bubble typing-bub"><div class="dots"><span></span><span></span><span></span></div></div>`;
@@ -79,19 +84,16 @@ async function send(txt) {
     cmsgs.push(um); showWelcome(false); addBubble(um);
 
     const inp = document.getElementById('chat-input');
-    inp.value = '';
+    if(inp) inp.value = '';
     busy = true; showTyping();
 
     try {
         const hist = cmsgs.slice(0, -1).map(m => ({ role: m.role, content: m.content || '' }));
-        const body = { message: txt, history: hist };
-
-        // CANLI URL BURADA
-        const res = await fetch('/chat', { // Render'da ana dizindeyiz, direkt /chat yeterli
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ message: txt }) 
-});
+        const res = await fetch('/chat', { 
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ message: txt, history: hist }) 
+        });
         
         if (!res.ok) throw new Error(`HTTP ${res.status}`);
         const data = await res.json();
@@ -108,19 +110,6 @@ async function send(txt) {
     if (s) { s.messages = [...cmsgs]; save() }
     renderHistory();
 }
-
-let sbOpen = window.innerWidth >= 768;
-document.getElementById('sidebar-toggle').onclick = () => {
-    sbOpen = !sbOpen; 
-    const sb = document.getElementById('sidebar');
-    if(sbOpen) {
-        sb.style.transform = 'translateX(0)';
-        sb.style.width = 'var(--sidebar-width)';
-    } else {
-        sb.style.transform = 'translateX(-100%)';
-        sb.style.width = '0';
-    }
-};
 
 document.getElementById('new-chat-btn').onclick = () => {
     cid = null; cmsgs = []; renderMsgs([]); showWelcome(true); renderHistory();
@@ -145,21 +134,23 @@ document.getElementById('chat-input').addEventListener('keydown', e => {
 });
 
 renderHistory(); showWelcome(true);
-if (window.innerWidth < 768) {
-    document.getElementById('sidebar').style.transform = 'translateX(-100%)';
-}
-// Mobil ve PC için menü tetikleyici
+
+// --- PC AYARLARINA DOKUNMAYAN MOBİL MENÜ YAMASI ---
 document.addEventListener('DOMContentLoaded', () => {
     const toggleBtn = document.querySelector('.toggle-btn-menu');
     const sidebar = document.getElementById('sidebar');
 
     if (toggleBtn) {
         toggleBtn.addEventListener('click', (e) => {
-            e.preventDefault();
             e.stopPropagation();
-            if (sidebar) {
-                sidebar.classList.toggle('active');
-            }
+            if (sidebar) sidebar.classList.toggle('active');
         });
     }
+
+    // Ekranın herhangi bir yerine tıklandığında menüyü kapat
+    document.addEventListener('click', (e) => {
+        if (sidebar && sidebar.classList.contains('active') && !sidebar.contains(e.target) && (toggleBtn && !toggleBtn.contains(e.target))) {
+            sidebar.classList.remove('active');
+        }
+    });
 });
