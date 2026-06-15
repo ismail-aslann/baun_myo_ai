@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>BAUN-MYO AI</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="shell">
+        <aside class="sidebar" id="sidebar">
+            <div class="sb-inner">
+                <div class="sb-logo">
+                    <div class="sb-logo-mark"><i class="fa-solid fa-graduation-cap"></i></div>
+                    <div class="sb-logo-text">
+                        <div class="sb-logo-name">BAUN-MYO Asistan</div>
+                        <div class="sb-logo-sub">Balıkesir MYO Asistanı</div>
+                    </div>
+                </div>
+
+                <div class="sb-actions">
+                    <button id="new-chat-btn" class="btn-new">
+                        <i class="fa-solid fa-plus"></i> Yeni Sohbet
+                    </button>
+                </div>
+
+                <div class="sb-label">GEÇMİŞ</div>
+                <div class="sb-history" id="chat-history-list">
+                    <div class="h-empty">
+                        <i class="fa-regular fa-comment-dots"></i>
+                        <span>Henüz sohbet yok</span>
+                    </div>
+                </div>
+
+                <div class="sb-footer">
+                    <button id="clear-history-btn" class="btn-clear">
+                        <i class="fa-regular fa-trash-can"></i> Geçmişi Temizle
+                    </button>
+                    <div class="version-chip">
+                        <i class="fa-solid fa-bolt"></i> Gemini 2.5 Flash <span class="pro-badge">Pro</span>
+                    </div>
+                    <div class="dev-info">
+                        Balıkesir MYO Yapay Zeka<br>Operatörlüğü Öğrencileri
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <main class="main">
+            <header class="topbar">
+                <button id="sidebar-toggle" class="toggle-btn-menu">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+                <div class="tb-avatar"><i class="fa-solid fa-robot"></i></div>
+                <div class="tb-name">BAUN-MYO Asistan</div>
+                <div class="tb-status"><span class="status-dot"></span> Çevrimiçi</div>
+            </header>
+
+            <div class="msgs-wrapper">
+                <div class="welcome" id="welcome-screen">
+                    <div class="w-icon-large"><i class="fa-solid fa-graduation-cap"></i></div>
+                    <h1 class="w-title">Merhaba! Nasıl yardımcı olabilirim?</h1>
+                    <p class="w-sub">Balıkesir Üniversitesi Meslek Yüksekokulu hakkında aklınıza takılan her şeyi sorabilirsiniz.</p>
+                    
+                    <div class="chips">
+                        <button class="chip"><i class="fa-solid fa-users"></i> Akademik Kadro</button>
+                        <button class="chip"><i class="fa-solid fa-book-open"></i> Bölümler</button>
+                        <button class="chip"><i class="fa-solid fa-briefcase"></i> Staj & 3+1 Sistemi</button>
+                        <button class="chip"><i class="fa-solid fa-shield-halved"></i> Yönetim</button>
+                        <button class="chip"><i class="fa-solid fa-phone"></i> İletişim</button>
+                    </div>
+                </div>
+
+                <div class="msgs" id="chat-messages">
+                    </div>
+            </div>
+
+            <footer class="bottom-area">
+                <div class="inp-container">
+                    <div class="inp-card">
+                        <input type="text" id="chat-input" placeholder="Mesajınızı buraya yazın..." autocomplete="off">
+                        <button class="mic-btn"><i class="fa-solid fa-microphone"></i></button>
+                        <button id="send-btn" class="send-btn">
+                            <i class="fa-solid fa-paper-plane"></i>
+                        </button>
+                    </div>
+                    <div class="inp-hint">Yapay zeka hata yapabilir. Lütfen önemli bilgileri resmi okul kaynaklarından doğrulayın.</div>
+                </div>
+
+                <div class="info-cards">
+                    <div class="info-card">
+                        <i class="fa-solid fa-shield-check icon-blue"></i>
+                        <div class="card-text">
+                            <strong>Güvenilir Kaynak</strong>
+                            <span>Resmi ve güvenilir bilgilere dayalı yanıtlar.</span>
+                        </div>
+                    </div>
+                    <div class="info-card">
+                        <i class="fa-solid fa-bolt icon-blue"></i>
+                        <div class="card-text">
+                            <strong>Hızlı Yanıt</strong>
+                            <span>Yapay zeka destekli hızlı ve doğru cevaplar.</span>
+                        </div>
+                    </div>
+                    <div class="info-card">
+                        <i class="fa-solid fa-graduation-cap icon-blue"></i>
+                        <div class="card-text">
+                            <strong>Akademik Destek</strong>
+                            <span>Eğitim hayatınızda size akademik destek sağlar.</span>
+                        </div>
+                    </div>
+                    <div class="info-card">
+                        <i class="fa-solid fa-lock icon-blue"></i>
+                        <div class="card-text">
+                            <strong>Veri Gizliliği</strong>
+                            <span>Verileriniz güvenli ve gizli tutulur.</span>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+        </main>
+    </div>
+    <script src="app.js"></script>
+</body>
+</html>
