@@ -1,7 +1,6 @@
 let sessions = JSON.parse(localStorage.getItem('baun_v7') || '[]');
 let cid = null, cmsgs = [], busy = false;
 
-// Avatarları yeni tasarıma (FontAwesome) uygun hale getirdik
 const U_AV = `<i class="fa-solid fa-user"></i>`;
 const A_AV = `<i class="fa-solid fa-robot"></i>`;
 
@@ -13,7 +12,6 @@ function mkSess(txt) {
     save(); return id;
 }
 
-// Kaydırma işlemini yeni yapıya göre güncelledik
 function scrollEnd() { 
     const w = document.querySelector('.msgs-wrapper'); 
     if(w) w.scrollTop = w.scrollHeight; 
@@ -88,8 +86,8 @@ async function send(txt) {
         const hist = cmsgs.slice(0, -1).map(m => ({ role: m.role, content: m.content || '' }));
         const body = { message: txt, history: hist };
 
-        // SENİN BACKEND ADRESİN (Buna dokunmadım)
-        const res = await fetch('http://localhost:8000/chat', {
+        // CANLI URL BURADA
+        const res = await fetch('https://baun-myo-ai.onrender.com/chat', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(body)
@@ -99,7 +97,7 @@ async function send(txt) {
         const data = await res.json();
 
         hideTyping(); busy = false;
-        const am = { role: 'assistant', content: data.reply || '(Boş yanıt)' };
+        const am = { role: 'assistant', content: data.response || '(Boş yanıt)' };
         cmsgs.push(am); addBubble(am);
     } catch (e) {
         hideTyping(); busy = false;
@@ -111,7 +109,6 @@ async function send(txt) {
     renderHistory();
 }
 
-// YENİ HTML ID'LERİNE GÖRE BUTON DİNLEYİCİLERİ
 let sbOpen = window.innerWidth >= 768;
 document.getElementById('sidebar-toggle').onclick = () => {
     sbOpen = !sbOpen; 
@@ -133,7 +130,6 @@ document.getElementById('clear-history-btn').onclick = () => {
     sessions = []; save(); cid = null; cmsgs = []; renderMsgs([]); showWelcome(true); renderHistory();
 };
 
-// HAZIR ÖNERİ ÇİPLERİNE TIKLAMA (data-p yerine .chip text content'i alındı)
 document.addEventListener('click', e => {
     const chip = e.target.closest('.chip');
     if (chip) send(chip.innerText);
@@ -148,7 +144,6 @@ document.getElementById('chat-input').addEventListener('keydown', e => {
     }
 });
 
-// İLK YÜKLEME AYARLARI
 renderHistory(); showWelcome(true);
 if (window.innerWidth < 768) {
     document.getElementById('sidebar').style.transform = 'translateX(-100%)';
