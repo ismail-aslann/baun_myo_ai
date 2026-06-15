@@ -1,4 +1,4 @@
-from .ai_engine import get_ai_response
+from backend.ai_engine import get_ai_response
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
