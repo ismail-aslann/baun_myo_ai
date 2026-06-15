@@ -1,3 +1,4 @@
+
 let sessions = JSON.parse(localStorage.getItem('baun_v7') || '[]');
 let cid = null, cmsgs = [], busy = false;
 
@@ -168,4 +169,16 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     });
+});
+document.addEventListener('DOMContentLoaded', () => {
+    const btn = document.querySelector('.toggle-btn-menu');
+    const sb = document.getElementById('sidebar');
+
+    if (btn) {
+        btn.onclick = (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            if (sb) sb.classList.toggle('active');
+        };
+    }
 });
