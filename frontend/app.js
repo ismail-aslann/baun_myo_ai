@@ -148,3 +148,18 @@ renderHistory(); showWelcome(true);
 if (window.innerWidth < 768) {
     document.getElementById('sidebar').style.transform = 'translateX(-100%)';
 }
+// Mobil ve PC için menü tetikleyici
+document.addEventListener('DOMContentLoaded', () => {
+    const toggleBtn = document.querySelector('.toggle-btn-menu');
+    const sidebar = document.getElementById('sidebar');
+
+    if (toggleBtn) {
+        toggleBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            if (sidebar) {
+                sidebar.classList.toggle('active');
+            }
+        });
+    }
+});

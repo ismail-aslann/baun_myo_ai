@@ -190,3 +190,20 @@ input { font-family: inherit; }
         font-size: 16px; /* iPhone'da zoom yapmasını engeller */
     }
 }
+/* --- MOBİL İÇİN EKSTRA GÜVENLİ FİX --- */
+@media (max-width: 768px) {
+    /* 3 Çizgi Butonunu Mobil İçin Zorla Görünür ve Tıklanabilir Yap */
+    .toggle-btn-menu {
+        display: block !important;
+        position: relative !important;
+        z-index: 10000 !important;
+        pointer-events: auto !important;
+        cursor: pointer !important;
+    }
+
+    /* Sidebar'ı mobilde tam üzerine oturt */
+    #sidebar.active {
+        left: 0 !important;
+        display: flex !important;
+    }
+}
