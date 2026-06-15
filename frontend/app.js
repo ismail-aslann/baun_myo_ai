@@ -154,3 +154,18 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 });
+// Menü butonunu dinle (İster PC ister Mobil)
+document.addEventListener('DOMContentLoaded', () => {
+    const menuBtns = document.querySelectorAll('.toggle-btn-menu');
+    const sidebar = document.getElementById('sidebar');
+
+    menuBtns.forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            if (sidebar) {
+                sidebar.classList.toggle('active');
+            }
+        });
+    });
+});

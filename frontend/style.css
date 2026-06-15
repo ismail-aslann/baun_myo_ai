@@ -192,3 +192,21 @@ input { font-family: inherit; }
     .inp-card { padding: 5px 15px !important; }
     #chat-input { width: 100% !important; font-size: 16px !important; }
 }
+/* --- SON MÜDAHALE --- */
+
+/* 1. Mikrofon butonunu komple gizle */
+.mic-btn { display: none !important; }
+
+/* 2. Menü butonunu her türlü tıklanabilir yap */
+.toggle-btn-menu {
+    display: block !important;
+    cursor: pointer !important;
+    z-index: 99999 !important; /* En üst katmana al */
+    pointer-events: auto !important; /* Tıklamayı zorunlu kıl */
+    padding: 10px !important;
+}
+
+/* 3. Input kutusunu mikrofon gidince genişlet */
+#chat-input {
+    padding-left: 10px !important;
+}
