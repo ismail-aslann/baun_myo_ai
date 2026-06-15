@@ -148,3 +148,45 @@ input { font-family: inherit; }
   .chips { display: flex; flex-direction: column; max-width: 100%; }
   .chip { width: 100%; }
 }
+/* --- MOBİL İÇİN GARANTİLİ DÜZENLEMELER --- */
+@media (max-width: 768px) {
+    /* Sidebar Menü - Kapalıyken solda gizli */
+    #sidebar {
+        position: fixed;
+        left: -280px; 
+        top: 0;
+        width: 250px;
+        height: 100%;
+        background: #fff;
+        z-index: 9999;
+        transition: 0.3s;
+        box-shadow: 2px 0 10px rgba(0,0,0,0.2);
+        overflow-y: auto;
+    }
+    
+    #sidebar.active {
+        left: 0; /* Açılınca ekrana gelir */
+    }
+
+    /* Buton Grubu - Mobilde alt alta ve düzgün */
+    .button-group {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        width: 90%;
+        margin: 15px auto;
+    }
+
+    button {
+        font-size: 13px !important;
+        padding: 12px !important;
+        width: 100% !important;
+        border-radius: 8px;
+    }
+
+    /* Mesaj Kutusu */
+    #chat-input {
+        width: 80% !important;
+        font-size: 16px; /* iPhone'da zoom yapmasını engeller */
+    }
+}
