@@ -4,15 +4,9 @@ from fastapi.responses import FileResponse
 import os
 import sys
 
-# Backend klasörünü sisteme tanıt
+# Backend'i sisteme tanıt
 sys.path.append(os.path.join(os.path.dirname(os.path.abspath(__file__)), "backend"))
-
-# ÖNEMLİ: ai_engine'i burada bir try-except ile import edelim
-try:
-    from ai_engine import get_ai_response
-except ImportError as e:
-    print(f"IMPORT HATASI: {e}")
-    get_ai_response = None
+from ai_engine import get_ai_response
 
 app = FastAPI()
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -24,14 +18,14 @@ async def read_index():
 
 @app.post("/chat")
 async def chat_endpoint(data: dict):
-    if get_ai_response is None:
-        raise HTTPException(status_code=500, detail="ai_engine yüklenemedi!")
-    
     try:
         user_message = data.get("message", "")
-        print(f"Gelen mesaj: {user_message}") # Loglara düşecek
-        response = get_ai_response(user_message)
+        # Frontend'den gelen 'history'yi alıyoruz, yoksa boş liste veriyoruz
+        history = data.get("history", []) 
+        
+        # Fonksiyonuna hem mesajı hem de geçmişi gönderiyoruz
+        response = get_ai_response(user_message, history)
         return {"response": response}
     except Exception as e:
-        print(f"DİREKT HATA: {str(e)}") # Render loglarında bu hatayı görmemiz lazım
+        print(f"HATA: {str(e)}")
         raise HTTPException(status_code=500, detail=str(e))
