@@ -1,14 +1,17 @@
+import os
+import sys
+# Proje kök dizinini sisteme ekle
+sys.path.append(os.path.dirname(os.path.abspath(__file__)))
+
 from fastapi import FastAPI, HTTPException
 from fastapi.staticfiles import StaticFiles
 from fastapi.responses import FileResponse
-import os
-import sys
-
-# Backend'i sisteme tanıt
-sys.path.append(os.path.join(os.path.dirname(os.path.abspath(__file__)), "backend"))
-from ai_engine import get_ai_response
+# Artık doğrudan import edebilirsin çünkü kök dizini ekledik
+from backend.ai_engine import get_ai_response
 
 app = FastAPI()
+# ... kodun kalanı aynı kalsın ...
+# app = FastAPI()
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 app.mount("/static", StaticFiles(directory=BASE_DIR), name="static")
 
