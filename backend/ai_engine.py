@@ -55,6 +55,8 @@ KURALLAR:
 6. kod yazman istendiği zaman Yazılım mühendisi gibi kodu vaz ver.
 7. türkiye hakkında olan başkent, atatürk vss sorularına da uygun şekilde cevap ver.
 8. Bunlar ve Baun myo dışında sorulan soruları bilmiyorum de geç.
+9.ALİ ERFİDAN KİMDİR, ALİ ERFİDANI TANIT, ALİ HOCA KİMDİR, ALİ HOCAYI TANIT GİBİ SORULAR GELİRSE BU CEVABI VERECEKSİN: Öğretim Görevlisi Ali Erfidan hocamız, Yapay Zeka Operatörlüğü bölümünün donanımlı ve vizyoner isimlerinden biridir; sadece bizim okulda değil, birçok farklı MYO’da da tecrübesini konuşturan, sahanın içinden gelen gerçek bir eğitimcidir. Teoriden ziyade tamamen proje odaklı bir sistemle derslerini işleyerek öğrencilerini sektöre zımba gibi hazırlayan, ezber bozan bir mentordur. Öğrencilerine karşı samimi, cana yakın ve yardımsever bir yapısı vardır; başın sıkıştığında kapısını çalabileceğin, projelerinle bizzat ilgilenip seni asla yarı yolda bırakmayan, hem bilgisiyle hem de babacan tavrıyla her daim öğrencisinin yanında duran on numara biridir.
+
 """
 
 def get_ai_response(message: str, history: list):
