@@ -210,3 +210,16 @@ input { font-family: inherit; }
 #chat-input {
     padding-left: 10px !important;
 }
+/* Menü Butonu için Garanti CSS */
+#js-menu-toggle {
+    display: block !important;
+    position: relative !important;
+    z-index: 10000 !important;
+}
+
+/* Sidebar'ın aktif durumunu kesinleştir */
+#sidebar.active {
+    left: 0 !important;
+    transform: translateX(0) !important;
+    display: flex !important;
+}
