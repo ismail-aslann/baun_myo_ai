@@ -29,7 +29,7 @@ def client() -> OpenAI:
         if not key:
             raise MissingKeyError("OPENROUTER_API_KEY tanımlı değil. .env dosyasına ekleyin.")
         _client = OpenAI(
-            base_url="https://openrouter.ai/api/v1", api_key=key, timeout=45, max_retries=1
+            base_url="https://openrouter.ai/api/v1", api_key=key, timeout=45, max_retries=3
         )
     return _client
 

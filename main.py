@@ -8,6 +8,7 @@ from pathlib import Path
 from fastapi import FastAPI, HTTPException, Request
 from fastapi.responses import FileResponse, StreamingResponse
 from fastapi.staticfiles import StaticFiles
+from openai import RateLimitError
 from pydantic import BaseModel, Field, field_validator
 
 from backend import ai_engine
@@ -83,6 +84,9 @@ def chat_stream(data: ChatIn, request: Request):
                 yield f"data: {json.dumps({'t': piece}, ensure_ascii=False)}\n\n"
         except ai_engine.MissingKeyError as e:
             yield f"data: {json.dumps({'error': str(e)}, ensure_ascii=False)}\n\n"
+        except RateLimitError as e:
+            print(f"HATA (yoğunluk): {e!r}")
+            yield f"data: {json.dumps({'error': 'Yapay zekâ servisi şu an çok yoğun. Birkaç saniye sonra tekrar sor.'}, ensure_ascii=False)}\n\n"
         except Exception as e:  # noqa: BLE001
             print(f"HATA: {e!r}")
             yield f"data: {json.dumps({'error': 'Model şu an yanıt veremedi, biraz sonra tekrar deneyin.'}, ensure_ascii=False)}\n\n"
